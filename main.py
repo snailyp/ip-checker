@@ -30,12 +30,12 @@ if __name__ == '__main__':
         # 获取ipv6
         try:
             ipv6 = ipchecker.fetch_ipv6()
+            if ipchecker.is_valid_ipv6(ipv6):
+                ip_info['ipv6'] = ipv6
+            else:
+                ip_info['ipv6'] = 'None'
         except:
             pass
-        if ipchecker.is_valid_ipv6(ipv6):
-            ip_info['ipv6'] = ipv6
-        else:
-            ip_info['ipv6'] = 'None'
 
         ip_details = ipchecker.fetch_ip_details(ip_info['ipv4'])
         if ip_details:

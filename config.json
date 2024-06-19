@@ -1,0 +1,9 @@
+{
+  "external_controller" : "http://127.0.0.1:9097",
+  "proxy": {
+    "http" : "http://127.0.0.1:7892",
+    "https" : "http://127.0.0.1:7892"
+  }
+}
+
+

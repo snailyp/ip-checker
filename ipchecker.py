@@ -3,14 +3,16 @@ import ipaddress
 import re
 import requests
 
+from config import config
+
 
 def fetch_ipv4():
-    response = requests.get('https://api.ipify.org?format=json')
+    response = requests.get('https://api.ipify.org?format=json', proxies=config['proxy'])
     return response.json().get('ip')
 
 
 def fetch_ipv6():
-    response = requests.get('https://api64.ipify.org?format=json')
+    response = requests.get('https://api64.ipify.org?format=json', proxies=config['proxy'])
     return response.json().get('ip')
 
 
@@ -32,7 +34,7 @@ def fetch_ip_details(ip):
     print('Fetching IP details for:', ip)
 
     try:
-        response = requests.get(f"http://ip-api.com/json/{ip}")
+        response = requests.get(f"http://ip-api.com/json/{ip}", proxies=config['proxy'])
         response.raise_for_status()  # Raise an error for bad status codes
         # print('IP details fetched:', response.text)
         ip_details = response.json()
@@ -44,7 +46,7 @@ def fetch_ip_details(ip):
 def fetch_ip_risk(ip):
     print('Fetching IP risk for:', ip)
     try:
-        response = requests.get(f"https://scamalytics.com/ip/{ip}")
+        response = requests.get(f"https://scamalytics.com/ip/{ip}", proxies=config['proxy'])
         response.raise_for_status()
         # print('IP risk fetched:', response.text)
         risk_data = parse_ip_risk(response.text)
@@ -78,7 +80,7 @@ def fetch_ping0_risk(ip):
 
     try:
         initial_response = requests.get(
-            f'https://ping0.cc/ip/{ip}', headers=headers)
+            f'https://ping0.cc/ip/{ip}', headers=headers, proxies=config['proxy'])
         initial_response.raise_for_status()
         # print('Initial Ping0 response:', initial_response.text)
 
@@ -86,7 +88,7 @@ def fetch_ping0_risk(ip):
         if window_x:
             cookies = {"jskey": window_x}
             final_response = requests.get(
-                f'https://ping0.cc/ip/{ip}', headers=headers, cookies=cookies)
+                f'https://ping0.cc/ip/{ip}', headers=headers, cookies=cookies, proxies=config['proxy'])
             final_response.raise_for_status()
             # print('Final Ping0 response:', final_response.text)
             ping0_data = parse_ping0_risk(final_response.text)
