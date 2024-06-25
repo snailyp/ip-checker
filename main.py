@@ -4,6 +4,7 @@ import ip_checker
 import clash_api
 import csv
 import clash_config
+from config import config
 
 
 def save_to_csv(ip_infos, filename):
@@ -79,11 +80,13 @@ if __name__ == '__main__':
     filtered_listeners = []
     for listener in listeners:
         if listener['proxy'] in proxies:
+            print(listener['proxy'] + ' is ok')
             filtered_listeners.append(listener)
         else:
             continue
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20, thread_name_prefix='clash-thread') as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=config['max_threads'],
+                                               thread_name_prefix='clash-thread') as executor:
         futures = [executor.submit(task, ip_infos, listener) for listener in filtered_listeners]
         concurrent.futures.wait(futures)
 

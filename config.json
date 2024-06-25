@@ -2,5 +2,6 @@
   "external_controller": "http://127.0.0.1:9097",
   "secret": "",
   "select_proxy_group": "GLOBAL",
-  "port_start": 42000
+  "port_start": 42000,
+  "max_threads": 20
 }
