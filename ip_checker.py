@@ -116,7 +116,7 @@ def parse_ping0_risk(html_content):
     xpath = {
         "ping0Risk": '/html/body/div[2]/div[2]/div[1]/div[2]/div[9]/div[2]/span',
         "ipType": '/html/body/div[2]/div[2]/div[1]/div[2]/div[8]/div[2]/span',
-        "nativeIP": '/html/body/div[2]/div[2]/div[1]/div[2]/div[11]/div[2]/span'
+        "nativeIP": '/html/body/div[2]/div[2]/div[1]/div[2]/div[10]/div[2]/span'
     }
 
     # 提取数据并存储在字典中
