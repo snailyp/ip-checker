@@ -17,7 +17,7 @@
 
     ```bash
     git clone https://github.com/snailyp/ip-checker.git
-    cd clash-ip-checker
+    cd ip-checker
     ```
 
 2. 安装依赖：
